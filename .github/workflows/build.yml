@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/*
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install .NET Core SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.x'  # Or the version you are using
+
+    - name: Install GitVersion
+      run: dotnet tool install --global GitVersion.Tool
+
+    - name: Determine Version
+      run: gitversion /output buildserver
+      env:
+        GITVERSION_DISABLECONFIGURATIONCHECK: "true"
+
+    - name: Build Project
+      run: dotnet build --configuration Release
+
+    - name: Test Project
+      run: dotnet test --configuration Release
