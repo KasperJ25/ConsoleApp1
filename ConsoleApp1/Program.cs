@@ -10,7 +10,7 @@
             string semVer = Environment.GetEnvironmentVariable("GitVersion_SemVer");
             string informationalVersion = Environment.GetEnvironmentVariable("GitVersion_InformationalVersion");
 
-            Console.WriteLine($"GitVersion Major: {major}");
+            Console.WriteLine($"GitVersion MajorR: {major}");
             Console.WriteLine($"GitVersion Minor: {minor}");
             Console.WriteLine($"GitVersion Patch: {patch}");
             Console.WriteLine($"Full SemVer: {semVer}");
