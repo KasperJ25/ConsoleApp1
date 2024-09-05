@@ -16,20 +16,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository with full history
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
-      - name: Install GitVersion
+      # Step 2: Run GitVersion using Docker
+      - name: Run GitVersion using Docker
         run: |
-          dotnet tool install -g GitVersion.Tool
-          export PATH="$PATH:~/.dotnet/tools"
+          docker run --rm -v "$(pwd):/repo" gittools/gitversion:5.6.11 /repo
 
-      - name: Run GitVersion
+      # Step 3: Output GitVersion Variables (Optional)
+      - name: Output GitVersion Variables
         run: |
-          gitversion /output json /showvariable FullSemVer
+          echo "FullSemVer: $(docker run --rm -v $(pwd):/repo gittools/gitversion:5.6.11 /repo /output json | jq -r .FullSemVer)"
 
+      # Step 4: Create tag with new version
       - name: Create tag with new version
         run: |
-          new_version=$(gitversion /output json /showvariable FullSemVer)
+          new_version=$(docker run --rm -v $(pwd):/repo gittools/gitversion:5.6.11 /repo /output json | jq -r .FullSemVer)
           git tag $new_version
           git push origin $new_version
