@@ -19,16 +19,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run GitVersion using Docker
+      - name: Install GitVersion
         run: |
-          docker run --rm -v "$(pwd):/repo" gittools/gitversion:5.6.11 /repo
+          dotnet tool install -g GitVersion.Tool
+          export PATH="$PATH:~/.dotnet/tools"
 
-      - name: Output GitVersion Variables
+      - name: Run GitVersion
         run: |
-          echo "FullSemVer: $(docker run --rm -v $(pwd):/repo gittools/gitversion:5.6.11 /repo /output json | jq -r .FullSemVer)"
+          gitversion /output json /showvariable FullSemVer
 
       - name: Create tag with new version
         run: |
-          new_version=$(docker run --rm -v $(pwd):/repo gittools/gitversion:5.6.11 /repo /output json | jq -r .FullSemVer)
+          new_version=$(gitversion /output json /showvariable FullSemVer)
           git tag $new_version
           git push origin $new_version
