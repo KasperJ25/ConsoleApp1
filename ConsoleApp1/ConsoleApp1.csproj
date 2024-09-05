@@ -15,9 +15,5 @@
     </PackageReference>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="dotnet gitversion &gt;gitversion.txt&#xD;&#xA;" />
-  </Target>
-
 </Project>
  
