@@ -25,7 +25,7 @@ namespace ConsoleApp1
             var assembly = Assembly.GetExecutingAssembly();
             var assemblyName = assembly.GetName().Name;
             var gitVersionInformationType = assembly.GetType("GitVersionInformation");
-            //var versionField = gitVersionInformationType.GetField("Major"); AAAAAaAAAA
+            //var versionField = gitVersionInformationType.GetField("Major"); AAAAAaAAAAAAAAA
 
             Console.WriteLine($"Assembly: {assembly.ToString()}");
             Console.WriteLine($"Assembly Name: {assemblyName}");
