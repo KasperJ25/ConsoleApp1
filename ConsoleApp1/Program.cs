@@ -30,7 +30,7 @@ namespace ConsoleApp1
             Console.WriteLine($"Assembly: {assembly.ToString()}");
             Console.WriteLine($"Assembly Name: {assemblyName}");
             Console.WriteLine($"GitVersion: {gitVersionInformationType}");
-            //Console.WriteLine($"Major: {versionField}"); AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            //Console.WriteLine($"Major: {versionField}"); A
 
         }
     }
