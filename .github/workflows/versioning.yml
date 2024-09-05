@@ -1,0 +1,40 @@
+name: Versioning with GitVersion
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/*
+      - hotfix/*
+
+permissions:
+  contents: write
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository with full history
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
+
+      # Step 2: Run GitVersion using Docker
+      - name: Run GitVersion using Docker
+        run: |
+          docker run --rm -v "$(pwd):/repo" gittools/gitversion:5.6.11 /repo
+
+      # Step 3: Output GitVersion Variables (Optional)
+      - name: Output GitVersion Variables
+        run: |
+          echo "FullSemVer: $(docker run --rm -v $(pwd):/repo gittools/gitversion:5.6.11 /repo /output json | jq -r .FullSemVer)"
+
+      # Step 4: Create tag with new version
+      - name: Create tag with new version
+        run: |
+          new_version=$(docker run --rm -v $(pwd):/repo gittools/gitversion:5.6.11 /repo /output json | jq -r .FullSemVer)
+          git tag $new_version
+          git push origin $new_version
