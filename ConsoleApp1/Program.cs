@@ -15,7 +15,7 @@ namespace ConsoleApp1
             Console.WriteLine($"GitVersion MajorR: {major}");
             Console.WriteLine($"GitVersion Minor: {minor}");
             Console.WriteLine($"GitVersion Patch: {patch}");
-            Console.WriteLine($"Full SemVer: {semVer}");
+            Console.WriteLine($"Full SemVer: {semVer}"); 
             Console.WriteLine($"Informational Version: {informationalVersion}");
             GetVersionS();
         }
