@@ -20,7 +20,7 @@ namespace ConsoleApp1
             GetVersionS();
         }
 
-        public static void GetVersionS()
+        public static void GetVersionS() 
         {
             var assembly = Assembly.GetExecutingAssembly();
             var assemblyName = assembly.GetName().Name;
