@@ -1,38 +1,34 @@
-name: Build
+name: Auto Increment Version Tag
 
 on:
   push:
     branches:
       - main
-      - develop
-      - feature/*
-  pull_request:
-    branches:
-      - main
-      - develop
 
 jobs:
-  build:
+  increment-tag:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Install .NET Core SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.x'  # Or the version you are using
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Install GitVersion
-      run: dotnet tool install --global GitVersion.Tool
+      - name: Get the latest tag
+        id: get_latest_tag
+        run: echo "latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
 
-    - name: Determine Version
-      run: gitversion /output buildserver
-      env:
-        GITVERSION_DISABLECONFIGURATIONCHECK: "true"
+      - name: Increment tag
+        id: increment_tag
+        run: |
+          latest_tag=$(echo ${{ env.latest_tag }} | sed 's/v//')
+          IFS='.' read -r -a version_parts <<< "$latest_tag"
+          major=${version_parts[0]}
+          minor=${version_parts[1]}
+          patch=${version_parts[2]}
+          new_patch=$((patch+1))
+          new_tag="v${major}.${minor}.${new_patch}"
+          echo "new_tag=${new_tag}" >> $GITHUB_ENV
 
-    - name: Build Project
-      run: dotnet build --configuration Release
-
-    - name: Test Project
-      run: dotnet test --configuration Release
+      - name: Create new tag
+        run: |
+          git tag ${{ env.new_tag }}
+          git push origin ${{ env.new_tag }}
