@@ -1,0 +1,44 @@
+name: Versioning with GitVersion
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/*
+      - hotfix/*
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine version
+        id: gitversion
+        run: |
+          gitversion /output json /showvariable FullSemVer
+        env:
+          GITVERSIONCONFIG: ./GitVersion.yml
+
+      - name: Update version in README (optional)
+        run: |
+          sed -i "s/Version:.*/Version: ${{ steps.gitversion.outputs.fullsemver }}/" README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Bump version to ${{ steps.gitversion.outputs.fullsemver }}"
+          git push origin main
+        if: ${{ steps.gitversion.outputs.fullsemver }}
+
+      - name: Create tag with new version
+        run: |
+          git tag ${{ steps.gitversion.outputs.fullsemver }}
+          git push origin ${{ steps.gitversion.outputs.fullsemver }}
+        if: ${{ steps.gitversion.outputs.fullsemver }}
