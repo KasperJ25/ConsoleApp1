@@ -1,5 +1,6 @@
 name: Versioning with GitVersion
 
+# Specify the events that trigger the workflow
 on:
   push:
     branches:
@@ -8,9 +9,14 @@ on:
       - feature/*
       - hotfix/*
 
+# Define permissions to allow the workflow to push changes
+permissions:
+  contents: write
+
 jobs:
   version:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
