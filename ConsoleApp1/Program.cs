@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp1
+﻿using System.Reflection;
+
+namespace ConsoleApp1
 {
     internal class Program
     {
@@ -15,6 +17,21 @@
             Console.WriteLine($"GitVersion Patch: {patch}");
             Console.WriteLine($"Full SemVer: {semVer}");
             Console.WriteLine($"Informational Version: {informationalVersion}");
+            GetVersionS();
+        }
+
+        public static void GetVersionS()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var assemblyName = assembly.GetName().Name;
+            var gitVersionInformationType = assembly.GetType("GitVersionInformation");
+            //var versionField = gitVersionInformationType.GetField("Major");
+
+            Console.WriteLine($"Assembly: {assembly.ToString()}");
+            Console.WriteLine($"Assembly Name: {assemblyName}");
+            Console.WriteLine($"GitVersion: {gitVersionInformationType}");
+            //Console.WriteLine($"Major: {versionField}"); AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
         }
     }
 }
