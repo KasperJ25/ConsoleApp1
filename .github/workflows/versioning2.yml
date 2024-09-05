@@ -1,6 +1,5 @@
 name: Versioning with GitVersion
 
-# Specify the events that trigger the workflow
 on:
   push:
     branches:
@@ -9,7 +8,6 @@ on:
       - feature/*
       - hotfix/*
 
-# Define permissions to allow the workflow to push changes
 permissions:
   contents: write
 
@@ -40,7 +38,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "Bump version to ${{ steps.gitversion.outputs.fullsemver }}"
-          git push origin main
+          git push origin master
         if: ${{ steps.gitversion.outputs.fullsemver }}
 
       - name: Create tag with new version
