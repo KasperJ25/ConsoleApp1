@@ -15,14 +15,14 @@ namespace ConsoleApp1
             Console.WriteLine($"GitVersion MajorR: {major}");
             Console.WriteLine($"GitVersion Minor: {minor}");
             Console.WriteLine($"GitVersion Patch: {patch}");
-            Console.WriteLine($"Full SemVer: {semVer}"); 
-            Console.WriteLine($"Informational Version: {informationalVersion}");
+            Console.WriteLine($"Full SemVer: {semVer}");
+            Console.WriteLine($"Informational Version: {informationalVersion}"); 
+
             GetVersionS();
         }
 
         public static void GetVersionS() 
         {
-
             var assembly = Assembly.GetExecutingAssembly();
             var assemblyName = assembly.GetName().Name;
             var gitVersionInformationType = assembly.GetType("GitVersionInformation");
