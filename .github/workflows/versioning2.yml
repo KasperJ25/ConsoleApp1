@@ -19,17 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9
-        with:
-          versionSpec: '5.x'
-
-      - name: Determine version
+      - name: Install and Run GitVersion
+        uses: gittools/actions/gitversion/execute@v0.9
         id: gitversion
-        run: |
-          gitversion /output json /showvariable FullSemVer
-        env:
-          GITVERSIONCONFIG: ./GitVersion.yml
 
       - name: Update version in README (optional)
         run: |
