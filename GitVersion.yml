@@ -6,9 +6,12 @@ branches:
     source-branches: ['main']
     is-release-branch: false
     tracks-release-branches: false
+
   main:
     regex: ^main$
     increment: Minor
     source-branches: ['develop']
     is-release-branch: true
+    tracks-release-branches: false
+
 commit-message-incrementing: Enabled
