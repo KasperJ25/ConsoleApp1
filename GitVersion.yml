@@ -2,7 +2,7 @@ branches:
   develop:
     mode: ContinuousDeployment
     increment: Patch
-    label: ''
+    pre-release-weight: 0
   main:
     regex: ^main$
     increment: Minor
