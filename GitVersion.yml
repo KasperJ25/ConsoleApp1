@@ -1,19 +1,15 @@
 branches:
   develop:
-    mode: ContinuousDelivery  # Ensure no pre-release tags are applied
+    mode: ContinuousDelivery
     increment: Patch
     regex: ^develop$
-    is-release-branch: false
-    pre-release-weight: 0  # Set weight to 0 to disable pre-release labels
+    is-release-branch: true  # Treat develop as a release branch
     tracks-release-branches: false
 
   main:
-    mode: ContinuousDelivery  # Use ContinuousDelivery for production releases
+    mode: ContinuousDelivery
     increment: Minor
     regex: ^main$
     is-release-branch: true
-    tracks-release-branches: false
 
-ignore:
-  sha: []
 commit-message-incrementing: Enabled
