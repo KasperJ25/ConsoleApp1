@@ -6,3 +6,4 @@ branches:
     regex: ^main$
     increment: Minor
     source-branches: ['develop']
+commit-message-incrementing: Enabled
