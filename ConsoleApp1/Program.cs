@@ -9,31 +9,43 @@ namespace ConsoleApp1
             string major = Environment.GetEnvironmentVariable("GitVersion_Major");
             string minor = Environment.GetEnvironmentVariable("GitVersion_Minor");
             string patch = Environment.GetEnvironmentVariable("GitVersion_Patch");
-            string semVer = Environment.GetEnvironmentVariable("GitVersion_SemVer"); 
+            string semVer = Environment.GetEnvironmentVariable("GitVersion_SemVer");
             string informationalVersion = Environment.GetEnvironmentVariable("GitVersion_InformationalVersion");
 
             Console.WriteLine($"GitVersion MajorR: {major}");
             Console.WriteLine($"GitVersion Minor: {minor}");
             Console.WriteLine($"GitVersion Patch: {patch}");
             Console.WriteLine($"Full SemVer: {semVer}");
-            Console.WriteLine($"Informational Version: {informationalVersion}"); 
+            Console.WriteLine($"Informational Version: {informationalVersion}");
 
+            HelloWorld();
             GetVersionS();
+            CountToOneHundred();
         }
 
-        public static void GetVersionS() 
+        public static void GetVersionS()
         {
             var assembly = Assembly.GetExecutingAssembly();
+            var versionAttribute = (AssemblyInformationalVersionAttribute)assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)[0];
+            var version = versionAttribute.InformationalVersion;
 
-            var assemblyName = assembly.GetName().Name;
-            var gitVersionInformationType = assembly.GetType("GitVersionInformation");
-            //var versionField = gitVersionInformationType.GetField("Major"); AAAAAaAAAAAAAAA
-
-            Console.WriteLine($"Assembly: {assembly.ToString()}");
-            Console.WriteLine($"Assembly Name: {assemblyName}");
-            Console.WriteLine($"GitVersion: {gitVersionInformationType}");
+            Console.WriteLine($"Assembly: {version}");
             //Console.WriteLine($"Major: {versionField}"); A
 
+        }
+
+        public static void HelloWorld()
+        {
+            Console.WriteLine($"Hello World!");
+
+        }
+
+        public static void CountToOneHundred()
+        {
+            for (int i = 0; i <= 100; i++)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }
