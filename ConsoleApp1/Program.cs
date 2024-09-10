@@ -24,7 +24,6 @@ namespace ConsoleApp1
         public static void GetVersionS() 
         {
             var assembly = Assembly.GetExecutingAssembly();
-
             var assemblyName = assembly.GetName().Name;
             var gitVersionInformationType = assembly.GetType("GitVersionInformation");
             //var versionField = gitVersionInformationType.GetField("Major"); AAAAAaAAAAAAAAA
