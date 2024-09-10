@@ -24,13 +24,10 @@ namespace ConsoleApp1
         public static void GetVersionS() 
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var assemblyName = assembly.GetName().Name;
-            var gitVersionInformationType = assembly.GetType("GitVersionInformation");
-            //var versionField = gitVersionInformationType.GetField("Major"); AAAAAaAAAAAAAAA
+            var versionAttribute = (AssemblyInformationalVersionAttribute)assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)[0];
+            var version = versionAttribute.InformationalVersion;
 
-            Console.WriteLine($"Assembly: {assembly.ToString()}");
-            Console.WriteLine($"Assembly Name: {assemblyName}");
-            Console.WriteLine($"GitVersion: {gitVersionInformationType}");
+            Console.WriteLine($"Assembly: {version}");
             //Console.WriteLine($"Major: {versionField}"); A
 
         }
