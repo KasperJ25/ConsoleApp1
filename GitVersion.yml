@@ -8,10 +8,13 @@ branches:
     tracks-release-branches: false
 
   main:
-    regex: ^main$
+    mode: ContinuousDeployment
     increment: Minor
+    regex: ^main$
     source-branches: ['develop']
     is-release-branch: true
     tracks-release-branches: false
 
+ignore:
+  sha: []
 commit-message-incrementing: Enabled
