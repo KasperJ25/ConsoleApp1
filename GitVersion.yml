@@ -2,6 +2,7 @@ branches:
   develop:
     mode: ContinuousDeployment
     increment: Patch
+    label: ''
   main:
     regex: ^main$
     increment: Minor
