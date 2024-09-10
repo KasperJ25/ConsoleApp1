@@ -2,10 +2,10 @@ branches:
   develop:
     mode: ContinuousDeployment
     increment: Patch
-    pre-release-weight: 0
     regex: ^develop$
     source-branches: ['main']
     is-release-branch: false
+    tracks-release-branches: false
   main:
     regex: ^main$
     increment: Minor
