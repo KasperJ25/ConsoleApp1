@@ -30,7 +30,11 @@ namespace ConsoleApp1
             var version = versionAttribute.InformationalVersion;
 
             Console.WriteLine($"Assembly: {version}");
-            //Console.WriteLine($"Major: {versionField}"); A
+            //Console.WriteLine($"Major: {versionField}");
+
+
+
+
 
         }
 
@@ -44,7 +48,8 @@ namespace ConsoleApp1
         {
             for (int i = 0; i <= 100; i++)
             {
-                Console.WriteLine(i);
+                Console.WriteLine(i); 
+                //test
             }
         }
     }
