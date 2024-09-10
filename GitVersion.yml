@@ -3,8 +3,12 @@ branches:
     mode: ContinuousDeployment
     increment: Patch
     pre-release-weight: 0
+    regex: ^develop$
+    source-branches: ['main']
+    is-release-branch: false
   main:
     regex: ^main$
     increment: Minor
     source-branches: ['develop']
+    is-release-branch: true
 commit-message-incrementing: Enabled
