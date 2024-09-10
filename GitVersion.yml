@@ -1,16 +1,10 @@
-next-version: 5.2.0
 branches:
   develop:
     mode: ContinuousDeployment
     increment: Patch
-    prevent-increment-of-merged-branch-version: true
-    track-merge-target: false
-    regex: ^develop$
-    source-branches: ['main']
-    is-release-branch: false
+    pre-release-weight: 0
   main:
     regex: ^main$
     increment: Minor
     source-branches: ['develop']
-    is-release-branch: true
 commit-message-incrementing: Enabled
