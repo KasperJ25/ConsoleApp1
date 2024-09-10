@@ -1,14 +1,15 @@
 branches:
   develop:
-    mode: ContinuousDelivery  # Switch to ContinuousDelivery to avoid pre-release tags
+    mode: ContinuousDelivery
     increment: Patch
     regex: ^develop$
     source-branches: ['main']
     is-release-branch: false
     tracks-release-branches: false
+    prevent-increment-of-merged-branch-version: true  # Prevent increment of patch on merges
 
   main:
-    mode: ContinuousDeployment  # Main stays on ContinuousDeployment for production builds
+    mode: ContinuousDeployment
     increment: Minor
     regex: ^main$
     source-branches: ['develop']
